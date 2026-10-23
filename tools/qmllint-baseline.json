@@ -1,0 +1,19 @@
+﻿{
+    "revision":  2,
+    "generated":  "2026-10-23T22:59:22",
+    "note":  "历史遗留问题基线：修完后用 -UpdateBaseline 降低计数，防止回退",
+    "counts":  {
+                   "ui/panels/WaveformPanel.qml|duplicate-property-binding":  2,
+                   "ui/panels/FilterPanel.qml|Quick.layout-positioning":  2,
+                   "ui/panels/EditorPanel.qml|missing-property":  1,
+                   "ui/panels/FilterStatusPanel.qml|missing-property":  2,
+                   "main.qml|missing-property":  3,
+                   "ui/panels/DebugPanel.qml|missing-property":  1,
+                   "ui/views/SongListView.qml|missing-property":  3,
+                   "ui/panels/FilterStatusPanel.qml|Quick.layout-positioning":  2,
+                   "ui/views/SongDetail.qml|missing-property":  1,
+                   "ui/views/SongListView.qml|Quick.layout-positioning":  6,
+                   "ui/pages/AIGeneratePage.qml|missing-property":  14,
+                   "ui/pages/FilterSortPage.qml|missing-property":  1
+               }
+}

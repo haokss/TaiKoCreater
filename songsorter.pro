@@ -5,6 +5,7 @@ QT += quick network multimedia
 CONFIG += c++17
 
 SOURCES += src/app/main.cpp \
+           src/app/QmlLiveReload.cpp \
            src/core/SongScanner.cpp \
            src/core/SongModel.cpp \
            src/core/TjaValidator.cpp \
@@ -16,6 +17,7 @@ SOURCES += src/app/main.cpp \
            src/utils/ToastManager.cpp
 
 HEADERS += src/core/SongInfo.h \
+           src/app/QmlLiveReload.h \
            src/core/ChartData.h \
            src/core/TjaValidator.h \
            src/core/SongScanner.h \

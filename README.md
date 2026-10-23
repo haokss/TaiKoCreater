@@ -12,9 +12,12 @@
 │
 ├── src/                                  # C++ 逻辑层
 │   ├── app/                              # 应用程序入口
-│   │   └── main.cpp                      # 主函数（窗口初始化）
+│   │   ├── main.cpp                      # 主函数（窗口初始化 / CLI / dev 模式）
+│   │   └── QmlLiveReload.h / .cpp        # QML 热重载（监视文件 → 语法探测 → 重载）
 │   ├── core/                             # 核心业务逻辑
 │   │   ├── SongInfo.h                    # 数据结构定义（SongInfo/CourseInfo/CourseChart）
+│   │   ├── ChartData.h                   # ChartView：C++ ↔ QML 的谱面数据契约（Q_GADGET）
+│   │   ├── TjaValidator.h / .cpp         # TJA 解析与合法性校验（纯函数，无 GUI 依赖）
 │   │   ├── SongScanner.h / .cpp          # TJA 文件扫描与解析
 │   │   └── SongModel.h / .cpp            # QML 数据模型（筛选/排序/谱面数据）
 │   ├── ai/                               # AI 服务
@@ -97,16 +100,55 @@ cmd /c "VsDevCmd.bat -arch=amd64 && cd /d e:\歌曲排序工具 && nmake -f Make
 
 VS Code 调试配置见 `.vscode/launch.json`（`cppvsdbg` + `debug/SongSorter.exe`）。
 
+## 开发模式（QML 热重载）
+
+只改界面时不用重新编译，存盘即生效：
+
+```powershell
+.\release\SongSorter.exe --dev
+.\release\SongSorter.exe --dev --qml-dir "E:\歌曲排序工具"   # 显式指定源码目录
+```
+
+- 直接从源码目录加载 `main.qml` 与 `ui/`，不再依赖 `release/` 里的副本
+- 监视 16 个 QML 文件及其所在目录，存盘后约 1 秒自动重载
+- 重载前只对**本次改动的文件**做语法探测：写错了会在 `release\dev.log` 里报错，并**保留旧窗口**
+- 业务对象（SongModel 等）挂在 QApplication 上而非 engine 上，重载不会丢已加载的歌曲列表
+- 日志写入 `release\dev.log`，已过滤掉 Controls 样式类的高频噪音
+
+## QML 静态检查
+
+`qmllint` 已接进构建脚本，编译前自动执行，能抓到拼错的属性名、未声明变量、Layout 误用等：
+
+```powershell
+.\build_release.cmd                 # 构建（含 lint）
+.\build_release.cmd --skip-lint     # 跳过 lint
+powershell -File tools\lint_qml.ps1 # 只跑检查
+```
+
+采用**基线比对**（`tools/qmllint-baseline.json`）：只对新增问题返回失败，历史遗留问题不会挡住构建。
+
+```powershell
+# 修完历史问题后，把当前结果固化为新基线
+powershell -File tools\lint_qml.ps1 -UpdateBaseline
+```
+
+`unqualified`（本项目大量使用 context property，必然出现）与 `Quick.color`（`#999` 这类三位缩写 Qt 是支持的）已在 `.qmllint.ini` 降为 info，不计入基线。
+
 ## QML 文件同步
 
 编译只处理 C++ 代码，QML 文件需手动（或通过脚本）复制到构建输出目录（`release/` 或 `debug/`）。
 
 ## AI 谱面生成
 
-API Key 硬编码于 `src/ai/DeepSeekClient.cpp`：
+API Key **不再硬编码**，按以下优先级读取：
+
+1. 环境变量 `DEEPSEEK_API_KEY`
+2. 程序目录下的 `config.json`：`{ "deepseekApiKey": "sk-..." }`（已在 .gitignore 中）
+3. 都没有时为空，界面里可手动填写
+
 - 通过 DeepSeek Chat API（`deepseek-chat` 模型）生成太鼓达人 TJA 谱面
 - 生成完成后自动保存到指定输出目录（默认为 `{游戏根目录}/Songs/AI_Generated`）
-- 同时打开 SongDetail 窗口预览生成的谱面
+- 同时打开 SongDetail 窗口预览生成的谱面，并给出谱面校验结论
 
 ## 功能一览
 
