@@ -1,0 +1,6 @@
+# UI 组件模块
+FilterStatusPanel 1.0 FilterStatusPanel.qml
+ToolPanel 1.0 ToolPanel.qml
+DebugPanel 1.0 DebugPanel.qml
+SongListView 1.0 SongListView.qml
+SongDetail 1.0 SongDetail.qml

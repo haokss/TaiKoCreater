@@ -1,0 +1,11 @@
+# 面板组件模块
+EditorPanel 1.0 EditorPanel.qml
+PlaybackControlPanel 1.0 PlaybackControlPanel.qml
+SongInfoPanel 1.0 SongInfoPanel.qml
+TimelinePanel 1.0 TimelinePanel.qml
+WaveformPanel 1.0 WaveformPanel.qml
+FilterPanel 1.0 FilterPanel.qml
+FilterStatusPanel 1.0 FilterStatusPanel.qml
+ToolPanel 1.0 ToolPanel.qml
+DebugPanel 1.0 DebugPanel.qml
+ToastNotification 1.0 ToastNotification.qml

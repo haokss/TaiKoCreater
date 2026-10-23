@@ -1,0 +1,55 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/debug/SongSorter.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/debug",
+            "preLaunchTask": "build-debug",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "E:\\Qt\\6.10.1\\msvc2022_64\\bin;%PATH%"
+                },
+                {
+                    "name": "QT_QUICK_CONTROLS_STYLE",
+                    "value": "Basic"
+                }
+            ],
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "sourceFileMap": {
+                "/qt5/": "E:\\Qt\\6.10.1\\msvc2022_64"
+            },
+            "visualizerFile": "E:\\Qt\\6.10.1\\msvc2022_64\\qt6.natvis"
+        },
+        {
+            "name": "Release",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/release/SongSorter.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/release",
+            "preLaunchTask": "build-release",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "E:\\Qt\\6.10.1\\msvc2022_64\\bin;%PATH%"
+                },
+                {
+                    "name": "QT_QUICK_CONTROLS_STYLE",
+                    "value": "Basic"
+                }
+            ],
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "sourceFileMap": {
+                "/qt5/": "E:\\Qt\\6.10.1\\msvc2022_64"
+            },
+            "visualizerFile": "E:\\Qt\\6.10.1\\msvc2022_64\\qt6.natvis"
+        }
+    ]
+}

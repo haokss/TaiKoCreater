@@ -1,0 +1,49 @@
+# ── 构建产物 ──
+release/
+debug/
+build/
+*.o
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+moc_*.cpp
+moc_*.h
+moc_predefs.h
+qrc_*.cpp
+ui_*.h
+Makefile
+Makefile.Debug
+Makefile.Release
+.qmake.stash
+*.qmlc
+*.jsc
+qmlcache/
+.qmlcache/
+
+# ── IDE ──
+.vs/
+*.user
+*.user.*
+CMakeUserPresets.json
+
+# ── 本地配置（含密钥，绝不入库）──
+config.json
+.env
+.env.*
+
+# ── 大体积素材 / 无关工程 ──
+# 本地歌曲测试库（约 2.7 GB）
+01/
+# 独立的 Python 项目，含 venv
+LyricFinder/
+# 第三方源码副本，按需自行下载
+aubio-0.4.9/
+*.ogg
+ChatGPT Image *.png
+
+# ── 系统 ──
+Thumbs.db
+desktop.ini
+.DS_Store
