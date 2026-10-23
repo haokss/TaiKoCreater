@@ -9,8 +9,8 @@ Rectangle {
     signal dragReleased()
 
     width: 580; height: 200; radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#E60012" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#E60012" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
@@ -46,8 +46,8 @@ Column {
             width: 96
             height: 96
             radius: 8
-            color: "#F3F3F3"
-            border.color: "#E5E5E5"
+            color: "#1D2C44"
+            border.color: "#273247"
 
             Image {
                 anchors.fill: parent
@@ -63,7 +63,7 @@ Column {
                 anchors.centerIn: parent
                 visible: !parent.children[0].visible
                 text: "No Cover"
-                color: "#999"
+                color: "#5B657A"
                 font.pixelSize: 12
             }
         }
@@ -77,7 +77,7 @@ Column {
                 text: root.formatFileName(audioPlayer.source)
                 font.pixelSize: 24
                 font.bold: true
-                color: "#222"
+                color: "#E6E8F0"
 
                 width: parent.width
                 elide: Text.ElideRight
@@ -87,7 +87,7 @@ Column {
             Text {
                 text: "Unknown Artist"
                 font.pixelSize: 14
-                color: "#666"
+                color: "#8FA6C6"
 
                 width: parent.width
                 elide: Text.ElideRight
@@ -99,7 +99,7 @@ Column {
 
                 Rectangle {
                     radius: 4
-                    color: "#ECECEC"
+                    color: "#243450"
                     height: 22
                     width: genreText.implicitWidth + 14
 
@@ -107,7 +107,7 @@ Column {
                         id: genreText
                         anchors.centerIn: parent
                         text: "J-POP"
-                        color: "#555"
+                        color: "#8FA6C6"
                         font.pixelSize: 11
                         font.bold: true
                     }
@@ -126,7 +126,7 @@ Column {
     Rectangle {
         width: parent.width
         height: 1
-        color: "#EEEEEE"
+        color: "#273247"
     }
 
     // 底部统计信息
@@ -140,7 +140,7 @@ Column {
             Text {
                 text: "BPM"
                 font.pixelSize: 11
-                color: "#999"
+                color: "#5B657A"
             }
 
             Text {
@@ -149,7 +149,7 @@ Column {
                       : "--"
                 font.pixelSize: 20
                 font.bold: true
-                color: "#222"
+                color: "#E6E8F0"
             }
         }
 
@@ -159,14 +159,14 @@ Column {
             Text {
                 text: "拍号"
                 font.pixelSize: 11
-                color: "#999"
+                color: "#5B657A"
             }
 
             Text {
                 text: "4/4"
                 font.pixelSize: 20
                 font.bold: true
-                color: "#222"
+                color: "#E6E8F0"
             }
         }
 
@@ -176,14 +176,14 @@ Column {
             Text {
                 text: "总时长"
                 font.pixelSize: 11
-                color: "#999"
+                color: "#5B657A"
             }
 
             Text {
                 text: root.formatTime(audioPlayer.duration)
                 font.pixelSize: 20
                 font.bold: true
-                color: "#222"
+                color: "#E6E8F0"
             }
         }
 
@@ -193,14 +193,14 @@ Column {
             Text {
                 text: "物量"
                 font.pixelSize: 11
-                color: "#999"
+                color: "#5B657A"
             }
 
             Text {
                 text: noteCount > 0 ? noteCount : "--"
                 font.pixelSize: 20
                 font.bold: true
-                color: "#222"
+                color: "#E6E8F0"
             }
         }
     }

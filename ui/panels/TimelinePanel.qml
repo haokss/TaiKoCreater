@@ -14,8 +14,8 @@ Rectangle {
     signal panRequested(real dx)
 
     width: 1200; height: 70; radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#9C27B0" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#8B5CF6" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
@@ -36,12 +36,12 @@ Rectangle {
 
     Rectangle {
         anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
-        height: 30; radius: 8; color: "#9C27B0"
-        Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 8; color: parent.color }
+        height: 30; radius: 8; color: "#111827"
+        Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 8; color: "#8B5CF6" }
         Row {
             anchors.centerIn: parent
             spacing: 12
-            Text { text: "时间轴"; color: "white"; font.bold: true; font.pointSize: 11 }
+            Text { text: "时间轴"; color: "#C9D2E3"; font.bold: true; font.pointSize: 11 }
             Text {
                 text: root.formatTime(audioPlayer ? audioPlayer.position : 0)
                    + " / " + root.formatTime(audioPlayer ? audioPlayer.duration : 0)
@@ -81,13 +81,19 @@ Rectangle {
                             anchors.top: parent.top
                             anchors.horizontalCenter: parent.horizontalCenter
                             width: 1; height: 10
-                            color: index % 4 === 0 ? "#999" : "#DDD"
+                            color: index % 4 === 0 ? "#5B657A" : "#273247"
                         }
                         Text {
                             anchors.top: parent.top; anchors.topMargin: 12
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: index % 4 === 0 ? "0:" + (index * 5) : ""
-                            font.pointSize: 7; color: "#999"
+                            text: {
+                                if (index % 4 !== 0) return ""
+                                var s = index * 5
+                                var m = Math.floor(s / 60)
+                                var sec = s % 60
+                                return m + ":" + (sec < 10 ? "0" : "") + sec
+                            }
+                            font.pointSize: 7; color: "#5B657A"
                         }
                     }
                 }
@@ -109,7 +115,7 @@ Rectangle {
                     y: parent.height * 0.5 - 8
                     width: 14; height: 14
                     radius: modelData.type === "don" ? 7 : 3
-                    color: modelData.type === "don" ? "#E60012" : "#2196F3"
+                    color: modelData.type === "don" ? "#E60012" : "#4DA3FF"
                     Text {
                         anchors.centerIn: parent
                         text: modelData.type === "don" ? "ド" : "カ"

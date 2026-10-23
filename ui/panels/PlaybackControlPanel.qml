@@ -15,8 +15,8 @@ Rectangle {
     width: 760
     height: 200
     radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#FF9800" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#FF9800" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x {
@@ -63,13 +63,13 @@ Rectangle {
                     text: root.formatTime(audioPlayer.position)
                     font.pixelSize: 34
                     font.bold: true
-                    color: "#222"
+                    color: "#E6E8F0"
                 }
 
                 Text {
                     text: root.formatTime(audioPlayer.duration)
                     font.pixelSize: 18
-                    color: "#666"
+                    color: "#8FA6C6"
                 }
             }
 
@@ -89,7 +89,7 @@ Rectangle {
                     Text {
                         text: "音量"
                         width: 40
-                        color: "#666"
+                        color: "#8FA6C6"
                         font.pixelSize: 12
                     }
 
@@ -111,7 +111,7 @@ Rectangle {
                     Text {
                         text: Math.round(audioPlayer.volume * 100) + "%"
                         width: 40
-                        color: "#333"
+                        color: "#C9D2E3"
                     }
                 }
 
@@ -122,7 +122,7 @@ Rectangle {
                     Text {
                         text: "倍速"
                         width: 40
-                        color: "#666"
+                        color: "#8FA6C6"
                         font.pixelSize: 12
                     }
 
@@ -139,7 +139,7 @@ Rectangle {
                     Text {
                         text: speedSlider.value.toFixed(2) + "x"
                         width: 45
-                        color: "#333"
+                        color: "#C9D2E3"
                     }
                 }
             }
@@ -156,11 +156,11 @@ Rectangle {
                 model: [
                     {
                         icon: "⏮",
-                        color: "#5C6BC0"
+                        color: "#6DA9FF"
                     },
                     {
                         icon: "▶",
-                        color: "#4CAF50"
+                        color: "#43C985"
                     },
                     {
                         icon: "⏸",
@@ -168,15 +168,15 @@ Rectangle {
                     },
                     {
                         icon: "⏭",
-                        color: "#5C6BC0"
+                        color: "#6DA9FF"
                     },
                     {
                         icon: "↻",
-                        color: "#2196F3"
+                        color: "#4DA3FF"
                     },
                     {
                         icon: "◇",
-                        color: "#607D8B"
+                        color: "#5B657A"
                     }
                 ]
 
@@ -228,7 +228,7 @@ Rectangle {
         Rectangle {
             width: parent.width
             height: 1
-            color: "#ECECEC"
+            color: "#243450"
         }
 
         // ======================

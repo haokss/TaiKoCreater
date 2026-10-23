@@ -14,8 +14,8 @@ Rectangle {
     signal panRequested(real dx)
 
     width: 1200; height: 150; radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#2196F3" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#4DA3FF" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
@@ -26,11 +26,43 @@ Rectangle {
         return Math.min(1.0, audioPlayer.position / audioPlayer.duration)
     }
 
+    // ── 标题栏 ──
+    Rectangle {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 30
+        radius: 8
+        color: "#111827"
+        Rectangle {
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 8
+            color: "#4DA3FF"
+        }
+        Row {
+            anchors.centerIn: parent
+            spacing: 12
+            Text {
+                text: "波形"
+                color: "#C9D2E3"
+                font.bold: true
+                font.pointSize: 11
+            }
+            Text {
+                text: Math.round(root.zoomLevel * 100) + "%"
+                color: "#FFC542"
+                font.pointSize: 9
+            }
+        }
+    }
+
     // 波形绘制区域
     Item {
         id: waveArea
         anchors.fill: parent
-        anchors.topMargin: 34; anchors.bottomMargin: 4; anchors.leftMargin: 8; anchors.rightMargin: 8
+        anchors.topMargin: 36; anchors.bottomMargin: 4; anchors.leftMargin: 8; anchors.rightMargin: 8
         clip: true
 
         // 缩放容器 — 水平偏移
@@ -59,13 +91,17 @@ Rectangle {
 
                 Component.onCompleted: requestPaint()
 
+                // 面板被拖动/重排改变尺寸后必须重绘，否则 Canvas 停留在旧的尺寸快照
+                onWidthChanged: requestPaint()
+                onHeightChanged: requestPaint()
+
                 onPaint: {
                     var ctx = getContext("2d")
                     var w = width, h = height
                     ctx.clearRect(0, 0, w, h)
 
                     if (pointCount <= 0) {
-                        ctx.fillStyle = "#AAA"
+                        ctx.fillStyle = "#5B657A"
                         ctx.font = "11px sans-serif"
                         ctx.textAlign = "center"
                         ctx.fillText(w > 100 ? "无波形数据" : "", w / 2, h / 2 + 5)
@@ -75,7 +111,7 @@ Rectangle {
                     var barWidth = w / pointCount
                     var centerY = h / 2
 
-                    ctx.fillStyle = "#AAAAAA"
+                    ctx.fillStyle = "rgba(74,144,217,0.8)"
                     for (var i = 0; i < pointCount; i++) {
                         var amp = data[i] || 0
                         var barH = Math.max(1, amp * centerY * 0.9)

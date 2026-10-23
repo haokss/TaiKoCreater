@@ -5,10 +5,10 @@ import QtQuick.Layouts 1.15
 Rectangle {
     id: root
 
-    color: "#FFFFFF"
+    color: "#162132"
     radius: 8
     clip: true
-    border.color: "#E0E0E0"
+    border.color: "#273247"
     border.width: 1
 
     ColumnLayout {
@@ -32,13 +32,13 @@ Rectangle {
                 onClicked: if (logger)
                     logger.clear()
                 background: Rectangle {
-                    color: "#F0F0F0"
+                    color: "#1D2C44"
                     radius: 4
-                    border.color: "#DDD"
+                    border.color: "#273247"
                 }
                 contentItem: Text {
                     text: parent.text
-                    color: "#666"
+                    color: "#8FA6C6"
                     font.pointSize: 9
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
@@ -49,9 +49,9 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "#F5F5F5"
+            color: "#1D2C44"
             radius: 4
-            border.color: "#E0E0E0"
+            border.color: "#273247"
             ScrollView {
                 anchors.fill: parent
                 anchors.margins: 2
@@ -61,7 +61,7 @@ Rectangle {
                     model: logger ? logger.logs : []
                     delegate: Text {
                         text: modelData
-                        color: "#333"
+                        color: "#C9D2E3"
                         font.pointSize: 8
                         font.family: "Consolas, Courier New, monospace"
                         wrapMode: Text.WordWrap

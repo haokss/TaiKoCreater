@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "../NoteSprites.js" as NoteSprites
 
 Rectangle {
     id: root
@@ -13,8 +14,8 @@ Rectangle {
     width: 1200
     height: 340
     radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#4A90D9" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#4A90D9" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x {
@@ -149,20 +150,22 @@ Rectangle {
         anchors.right: parent.right
         height: 30
         radius: 8
-        color: "#4A90D9"
+        color: "#111827"
         Rectangle {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             height: 8
-            color: parent.color
+            color: "#4A90D9"
         }
         Row {
             anchors.centerIn: parent
             spacing: 12
             Text {
-                text: chartData ? "编辑区 - " + chartData.course + " ★" + chartData.level : "编辑区"
-                color: "white"
+                text: (chartData && chartData.course)
+                      ? "编辑区 - " + chartData.course + " ★" + chartData.level
+                      : "编辑区"
+                color: "#C9D2E3"
                 font.bold: true
                 font.pointSize: 11
             }
@@ -180,7 +183,7 @@ Rectangle {
                     anchors.centerIn: parent
                     text: "打印槽位"
                     font.pointSize: 8
-                    color: "#333"
+                    color: "#C9D2E3"
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -250,13 +253,13 @@ Rectangle {
 
                     width: measureColumn.width
                     height: 52
-                    color: index % 2 ? "#F5F5F5" : "#FFFFFF"
+                    color: index % 2 ? "#1D2C44" : "#162132"
                     onLineDataChanged: notes = root.noteList(lineData)
 
                     Rectangle {
                         width: parent.width
                         height: 20
-                        color: "#E8EDF2"
+                        color: "#1D2C44"
                         Row {
                             anchors.left: parent.left
                             anchors.leftMargin: 8
@@ -264,13 +267,13 @@ Rectangle {
                             spacing: 12
                             Text {
                                 text: "第 " + (index + 1) + " 小节"
-                                color: "#5A7D9A"
+                                color: "#8FA6C6"
                                 font.pointSize: 9
                                 font.bold: true
                             }
                             Text {
                                 text: "(" + lineData.length + " 槽位)"
-                                color: "#999"
+                                color: "#5B657A"
                                 font.pointSize: 8
                             }
                         }
@@ -292,10 +295,13 @@ Rectangle {
                                 property int noteType: modelData.type
                                 x: root.slotX(charIdx, lineData.length)
                                 y: 4
-                                source: "../../res/" + noteType + "_note.png"
-                                width: 24
-                                height: 24
+                                source: "../../res/Notes.png"
+                                sourceClipRect: NoteSprites.clipFor(noteType)
+                                width: NoteSprites.widthFor(noteType)
+                                height: NoteSprites.sizeFor(noteType)
+                                fillMode: Image.PreserveAspectFit
                                 smooth: true
+                                mipmap: true
                                 z: handler.drag.active ? 10 : 1
 
                                 MouseArea {

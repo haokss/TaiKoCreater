@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import "../NoteSprites.js" as NoteSprites
 
 // 音符选择工具面板 — 支持拖拽音符到编辑区，每行一个音符（图标左 + 文本右）
 Rectangle {
@@ -12,8 +13,8 @@ Rectangle {
     signal noteSelected(int noteType)
 
     width: 160; height: 330; radius: 8
-    color: "#FFFFFF"
-    border.color: dragArea.drag.active ? "#4CAF50" : "#DDD"
+    color: "#162132"
+    border.color: dragArea.drag.active ? "#43C985" : "#273247"
     border.width: dragArea.drag.active ? 2 : 1
     z: dragArea.drag.active ? 10 : 1
     Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
@@ -28,9 +29,9 @@ Rectangle {
 
     Rectangle {
         anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
-        height: 30; radius: 8; color: "#4CAF50"
-        Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 8; color: parent.color }
-        Text { anchors.centerIn: parent; text: "音符工具"; color: "white"; font.bold: true; font.pointSize: 11 }
+        height: 30; radius: 8; color: "#111827"
+        Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 8; color: "#43C985" }
+        Text { anchors.centerIn: parent; text: "音符工具"; color: "#C9D2E3"; font.bold: true; font.pointSize: 11 }
     }
 
     // ── 音符列表（每行一个，图标左 + 文本右） ──
@@ -48,13 +49,13 @@ Rectangle {
             Repeater {
                 model: [
                     { type: 1, label: "ドン (Don)", color: "#E60012" },
-                    { type: 2, label: "カッ (Ka)", color: "#2196F3" },
+                    { type: 2, label: "カッ (Ka)", color: "#4DA3FF" },
                     { type: 3, label: "大ドン (Don)", color: "#E60012" },
-                    { type: 4, label: "大カッ (Ka)", color: "#2196F3" },
-                    { type: 5, label: "連打", color: "#FFB300" },
+                    { type: 4, label: "大カッ (Ka)", color: "#4DA3FF" },
+                    { type: 5, label: "連打", color: "#FFC542" },
                     { type: 6, label: "大連打", color: "#FF9800" },
-                    { type: 7, label: "風船", color: "#9C27B0" },
-                    { type: 8, label: "終了", color: "#795548" }
+                    { type: 7, label: "風船", color: "#8B5CF6" },
+                    { type: 8, label: "終了", color: "#5B657A" }
                 ]
 
                 Rectangle {
@@ -62,8 +63,8 @@ Rectangle {
                     width: parent.width
                     height: 28
                     radius: 6
-                    color: root.selectedNote === modelData.type ? modelData.color : "#F5F5F5"
-                    border.color: root.selectedNote === modelData.type ? modelData.color : "#DDD"
+                    color: root.selectedNote === modelData.type ? modelData.color : "#1D2C44"
+                    border.color: root.selectedNote === modelData.type ? modelData.color : "#273247"
                     border.width: root.selectedNote === modelData.type ? 2 : 1
                     scale: root.selectedNote === modelData.type ? 1.03 : 1.0
 
@@ -84,7 +85,8 @@ Rectangle {
                         spacing: 8
 
                         Image {
-                            source: "../../res/" + modelData.type + "_note.png"
+                            source: "../../res/Notes.png"
+                            sourceClipRect: NoteSprites.clipFor(modelData.type)
                             width: 20; height: 20
                             smooth: true
                             fillMode: Image.PreserveAspectFit
@@ -92,7 +94,7 @@ Rectangle {
                         Text {
                             text: modelData.label
                             font.pointSize: 9
-                            color: root.selectedNote === modelData.type ? "white" : "#444"
+                            color: root.selectedNote === modelData.type ? "white" : "#C9D2E3"
                             font.bold: root.selectedNote === modelData.type
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -124,7 +126,7 @@ Rectangle {
         anchors.bottom: parent.bottom; anchors.bottomMargin: 8
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width - 16; height: 18; radius: 4
-        color: "#F0F0F0"
+        color: "#1D2C44"
         Text {
             anchors.centerIn: parent
             text: {
@@ -132,7 +134,7 @@ Rectangle {
                                5:"連打", 6:"大連打", 7:"風船", 8:"終了" }
                 return "已选: " + (labels[selectedNote] || "")
             }
-            font.pointSize: 8; color: "#666"
+            font.pointSize: 8; color: "#8FA6C6"
         }
     }
 
